@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Deep Equilibrium Learning of Explicit Regularizers for Imaging Inverse Problems">
+    <meta name="author" content="Zihao Zou, Jiaming Liu, Brendt Wohlberg, Ulugbek S. Kamilov">
+
+    <title>Deep Equilibrium Learning of Explicit Regularizers for Imaging Inverse Problems</title>
+    <!-- Bootstrap core CSS -->
+    <!--link href="bootstrap.min.css" rel="stylesheet"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="src/css/style.css">
+
+</head>
+
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container"></div>
+    <h2>Deep Equilibrium Learning of Explicit Regularizers</h2> 
+    <h2>for Imaging Inverse Problems</h2>
+    <p class="abstract"><b>A Framework for Learning End-to-End MSE-optimal Explicit Regularizers for Inverse Problems</b></p>
+    <hr>
+    <p class="authors">
+        <a href="https://zihaozou.github.io">Zihao Zou<sup>1,*</sup></a>,
+        <a href="https://jiamingliu-jeremy.github.io">Jiaming Liu<sup>1,*</sup></a>,
+        <a href="http://brendt.wohlberg.net">Brendt Wohlberg<sup>2</sup></a>,
+        <a href="https://engineering.wustl.edu/faculty/Ulugbek-Kamilov.html">Ulugbek S. Kamilov<sup>1</sup></a></br>
+    </p>
+    <p>
+        <a><sup>1</sup>Computational Imaging Group (CIG), Washington University in St.Louis, St. Louis, MO, USA</a></br>
+        <a><sup>2</sup>Theoretical Division at Los Alamos National Laboratory, Los Alamos, NM, USA</a></br>
+        <a><sup>*</sup>First two authors contributed equally</a></br>
+    </p>
+
+    <div class="btn-group" role="group" aria-label="Top menu">
+        <!--<a class="btn btn-primary" href="https://ieeexplore.ieee.org/document/10004791">Paper</a>-->
+        <a class="btn btn-primary" href="https://arxiv.org/abs/2303.05386">Preprint</a>
+        <a class="btn btn-primary" href="https://github.com/wustl-cig/ELDER">Code</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="section">
+
+        <br>
+        <h2>Abstract</h2>
+        <hr>
+        <p>
+            There has been significant recent interest in the use of deep learning for regularizing imaging inverse problems. Most work in the area has focused on regularization imposed implicitly by convolutional neural networks (CNNs) pre-trained for image reconstruction. In this work, we follow an alternative line of work based on learning explicit regularization functionals that promote preferred solutions. We develop the <b>Explicit Learned Deep Equilibrium Regularizer (ELDER)</b> method for learning explicit regularizers that minimize a mean-squared error (MSE) metric. ELDER is based on a regularization functional parameterized by a CNN and a deep equilibrium learning (DEQ) method for training the functional to be MSE-optimal at the fixed points of the reconstruction algorithm. The explicit regularizer enables ELDER to directly inherit fundamental convergence results from optimization theory. On the other hand, DEQ training enables ELDER to improve over existing explicit regularizers without prohibitive memory complexity during training. We use ELDER to train several approaches to parameterizing explicit regularizers and test their performance on three distinct imaging inverse problems. Our results show that ELDER can greatly improve the quality of explicit regularizers compared to existing methods, and show that learning explicit regularizers does not compromise performance relative to methods based on implicit regularization.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Improvement over Regularizers based on Image Denoising</h2>
+        <hr>
+        <div class="row align-items-center">
+			<div class="col justify-content-center text-center">
+                <img style="width:95%" src="img/psnr_compare.jpg" >
+                <p style="text-align: justify;"><b>Figure 1:</b> Comparison between ELDER and GSPnP for single image super-resoluion. Both methods seek to learn explicit regularizers parametrized by the same CNN architecture, but are trained differently. Left: Evolution of the PSNR is plotted against iteration number for both methods. Right: Visual illustration of iterates obtained by GSPnP (top) and ELDER (bottom). Note how ELDER outperforms GSPnP due to its ability to learn regularizers that minimize MSE.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Applications of ELDER</h2>
+        <hr>
+
+        <div class="row align-items-center">
+			<div class="col justify-content-center text-center">
+                <img src="img/sr_compare.jpg" style="width:90%" alt="Banner">
+                <p><b>Figure 2:</b> Visual comparison of ELDER against several well-known methods on the problem of single image super-resolution (SISR) with scale d = 3 (top) and d = 4 (bottom). The blur kernels are shown in the zoomed low-resolution (LR) images, respectively. Note how ELDER significantly improves over GSPnP, a recent method for learning explicit regularizers. Additionally, it performs better than DEQ and DPIR, both of which rely on implicit regularization specified by a CNN. This figure shows that ELDER learns explicit regularizers without compromising image quality.</p>
+            </div>
+        </div>
+        
+        <div class="row align-items-center">
+			<div class="col justify-content-center text-center">
+                <img src="img/inpaint.jpg" style="width:90%" alt="Banner">
+                <p style="text-align: justify;"><b>Figure 3:</b> Comparison of ELDER relative to DPIR, GSPnP and DEQ for image inpainting with masked probability of p = 0.7 on CBSD68. Note that ELDER provides substantial improvements over PnP image reconstruction methods, matching the performance of DEQ.</p>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+			<div class="col justify-content-center text-center">
+                <img src="img/mri.jpg" style="width:90%" alt="Banner">
+                <p style="text-align: justify;"><b>Figure 4:</b> Evaluation of several well-known methods on reconstruction of a brain image from its radial Fourier measurements at 10% sampling. Note how ELDER outperforms DPIR, GSPnP, and the traditional DEQ both quantitatively and visually.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Explicit Parametrization Strategies</h2>
+
+        <div class="row align-items-center">
+            <div class="col justify-content-center text-center">
+                <img src="img/priors.jpg" style="width:90%" alt="Banner">
+                <p style="text-align: justify;"><b>Figure 5:</b>  Visual illustration of the results obtained by ELDER using the three parameterization approaches for the regularization functional. We show results for three inverse problems: image super-resolution (top), reconstruction from Fourier samples (middle), and image inpainting (bottom). The rightmost panel plots the evolution of PSNR (dB) accross forward iterations. Note how LSR achieves an overall better performance compared to DSV and RED.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Paper</h2>
+        <hr>
+        <div>
+            <div class="list-group">
+                <a href="https://arxiv.org/abs/2203.17061"
+                   class="list-group-item">
+                    <img src="img/paper_thumbnail.jpg" style="width:100%; margin-right:-20px; margin-top:-10px;">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Bibtex</h2>
+        <hr>
+        <div class="bibtexsection">
+            @article{Zou.etal2023,
+                author={Zou, Zihao
+                    and Liu, Jiaming
+                    and Wohlberg, Brendt 
+                    and Kamilov, Ulugbek S.},
+                title={Deep Equilibrium Learning of Explicit Regularizers 
+                for Imaging Inverse Problems},
+                note={arXiv:2303.05386},
+                year={2023}
+              }
+        </div>
+    </div>
+
+    <hr>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
